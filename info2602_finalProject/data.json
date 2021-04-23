@@ -1,0 +1,18 @@
+[
+    {
+      "start":"San-Fernando",
+      "destination":"Curepe",
+      "travel_time":50,
+      "traffic": "Clear"
+
+    },
+
+    {
+      "start":"Curepe",
+      "destination":"St-Agustine",
+      "travel_time":5,
+      "traffic": "Moderate"
+
+    }
+
+]

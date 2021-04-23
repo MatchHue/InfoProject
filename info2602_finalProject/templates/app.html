@@ -1,0 +1,94 @@
+{%extends "layout.html" %}
+
+{{super()}}
+
+
+
+{%block content%}
+
+ {% if current_user.is_authenticated %}
+   <h3> Hi {{ current_user.username }}! </h3>
+  {% endif %}
+
+<ul id="slide-out" class="sidenav sidenav-fixed">
+
+  <section class="container">
+
+    <form id="search" method="GET" action="{{ url_for('search_route') }}">
+      <h1>Search</h1>
+
+      <div class="input-field col s12">
+        <input placeholder="Search" name="search" type="text" class="validate">
+        <label for="name">Search</label>
+      </div>
+
+      <div class="input-field">
+        <button class="btn waves-effect waves-light" type="submit">Search
+      </button>  
+    </div>
+    </form>
+
+    <form id="insert" method="POST" action="/insertRoute">
+
+    <h1>Add Route</h1>
+
+    <div class="input-field col s12">
+      <input placeholder="Start" name="start" type="text" class="validate">
+      <label for="name">Start</label>
+    </div>
+
+    <div class="input-field col s12">
+      <input placeholder="Destination" name="destination" type="text" class="validate">
+      <label for="name">Destination</label>
+    </div>
+    
+    <div class="input-field col s12">
+      <input placeholder="Travel Time in minutes" name="travel_time" type="number" class="validate">
+      <label for="name">Travel Time in minutes</label>
+    </div>
+
+    <div class="input-field col s12">
+      <input placeholder="Traffic" name="traffic" type="text" class="validate">
+      <label for="name">Traffic</label>
+    </div>
+
+    <div class="input-field">
+      <button class="btn waves-effect waves-light" type="submit">Add
+      </button>  
+    </div>
+
+    </form>
+  </section>
+</ul>
+
+<main class="row">
+        <article class="col s12">
+            <table>
+                <thead>
+                <tr>
+                    <th>Start</th>
+                    <th>Destination</th>
+                    <th>Travel Time</th>
+                    <th>Traffic</th>
+                    <th>Delete</th>
+                    <th>Share</th>
+                </tr>
+                </thead>
+        
+                <tbody>
+                   {%for row in routes%}
+                      <tr>
+                        <td>{{row.start}}</td>
+                        <td>{{row.destination}}</td>
+                        <td>{{row.travel_time}} minutes</td>
+                        <td>{{row.traffic}}</td>
+                        <td><a class="waves-effect waves-light btn" href="/deleteRoute/{{row.id}}">DELETE</a></td>
+                        <td><a class="waves-effect waves-light btn" href="/shareRoute/{{row.id}}">Share</a></td>
+                        
+                      </tr>
+                   {%endfor%}
+                </tbody>
+            </table>
+        </article>
+</main>
+{%endblock%}  
